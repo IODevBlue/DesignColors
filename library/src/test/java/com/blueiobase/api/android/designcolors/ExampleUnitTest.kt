@@ -1,4 +1,4 @@
-package com.blueiobase.api.android.materialpalettecolors
+package com.blueiobase.api.android.designcolors
 
 import org.junit.Test
 
