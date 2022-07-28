@@ -27,7 +27,7 @@ val blue50 = DesignColors.MaterialDesign.BLUE_50
 Then apply it to a View or Widget:
 ```KOTLIN
 val textView: TextView = findViewById(R.id.name_textview)
-textView.background = blue_50
+textView.background = blue50
 ```
 
 To retrieve all Material Blue Colors in an Integer Array:
@@ -61,7 +61,7 @@ val midNightBlue50 = DesignColors.FlatDesign.MIDNIGHT_BLUE_50
 Then apply it to a View or Widget:
 ```KOTLIN
 val textView: TextView = findViewById(R.id.email_textview)
-textView.background = blue_50
+textView.background = midNightBlue50
 ```
 
 To retrieve all Flat Design Midnight Blue in an Integer Array:
