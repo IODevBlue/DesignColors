@@ -9,6 +9,7 @@ import androidx.core.graphics.ColorUtils
  *
  * - Material Design Colors specified in the [Material Color System][https://material.io/design/color/the-color-system.html#color-theme-creation].
  * - Flat UI colors used in web design.
+ * - Official colors for several mainstream companies.
  *
  * @author IO DevBlue
  * @since 1.0.0
@@ -969,5 +970,145 @@ object DesignColors {
         }
     }
 
+    /** The official Google colors. */
+    object Google {
+        @ColorInt val BLUE = Color.rgb(66, 133, 244)
+        @ColorInt val YELLOW = Color.rgb(244, 180, 0)
+        @ColorInt val RED = Color.rgb(219, 68, 55)
+        @ColorInt val GREEN = Color.rgb(15, 157, 88)
+    }
+
+    /** The official Twitter colors. */
+    object Twitter {
+        @ColorInt val BLUE = Color.rgb(29, 161, 242)
+        @ColorInt val BLACK = Color.rgb(20, 23, 26)
+        @ColorInt val DARK_GRAY = Color.rgb(101, 119, 134)
+        @ColorInt val LIGHT_GRAY = Color.rgb(170, 184, 194)
+        @ColorInt val EXTRA_LIGHT_GRAY = Color.rgb(225, 232, 237)
+        @ColorInt val EXTRA_EXTRA_LIGHT_GRAY = Color.rgb(245, 248, 250)
+    }
+
+    /** The official Instagram colors. */
+    object Instagram {
+        @ColorInt val ROYAL_BLUE = Color.rgb(5, 10, 230)
+        @ColorInt val BLUE = Color.rgb(88, 81, 216)
+        @ColorInt val PURPLE = Color.rgb(131, 58, 180)
+        @ColorInt val DARK_PINK = Color.rgb(193, 53, 132)
+        @ColorInt val PURPLE_RED = Color.rgb(225, 48, 108)
+        @ColorInt val RED = Color.rgb(253, 36, 76)
+        @ColorInt val DARK_ORANGE = Color.rgb(88, 81, 216)
+        @ColorInt val ORANGE = Color.rgb(247, 119, 55)
+        @ColorInt val YELLOW = Color.rgb(252, 175, 69)
+        @ColorInt val LIGHT_YELLOW = Color.rgb(225, 220, 128)
+    }
+    /** The official YouTube colors. */
+    object YouTube {
+        @ColorInt val RED = Color.rgb(255, 0, 0)
+    }
+
+    /** The official Pinterest colors. */
+    object Pinterest {
+        @ColorInt val RED = Color.rgb(230, 0, 35)
+    }
+
+    /** The official Netflix colors. */
+    object Netflix {
+        @ColorInt val RED = Color.rgb(229, 9, 20)
+    }
+
+    /** The official Spotify colors. */
+    object Spotify {
+        @ColorInt val GREEN = Color.rgb(30, 215, 96)
+        @ColorInt val BLACK = Color.rgb(25, 20, 20)
+    }
+
+    /** The official HP colors. */
+    object HP {
+        @ColorInt val BLUE = Color.rgb(0, 150, 214)
+    }
+
+    /** The official Facebook colors. */
+    object Facebook {
+        @ColorInt val BLUE = Color.rgb(66, 103, 178)
+        @ColorInt val GREY = Color.rgb(137, 143, 156)
+
+        /** The official Facebook Messenger colors. */
+        object Messenger {
+            @ColorInt val LIGHT_BLUE = Color.rgb(0, 178, 255)
+            @ColorInt val BLUE = Color.rgb(0, 106, 255)
+
+        }
+    }
+
+    /** The official Snapchat colors. */
+    object Snapchat {
+        @ColorInt val YELLOW = Color.rgb(255, 252, 0)
+    }
+
+    /** The official Android colors. */
+    object Android {
+        @ColorInt val GREEN = Color.rgb(120, 194, 87)
+    }
+
+    /** The official Amazon colors. */
+    object Amazon {
+        @ColorInt val ORANGE = Color.rgb(255, 153, 0)
+    }
+
+    /** The official Microsoft colors. */
+    object Microsoft {
+        @ColorInt val ORANGE_RED = Color.rgb(242, 80, 34)
+        @ColorInt val GREEN = Color.rgb(127, 186, 0)
+        @ColorInt val BLUE = Color.rgb(0, 164, 239)
+        @ColorInt val YELLOW = Color.rgb(255, 185, 0)
+        @ColorInt val GREY = Color.rgb(115, 115, 115)
+    }
+
+    /** The official Xbox colors. */
+    object Xbox {
+        @ColorInt val GREEN = Color.rgb(16, 124, 16)
+        @ColorInt val GRAY = Color.rgb(58, 58, 58)
+    }
+
+    /** The official Whatsapp colors. */
+    object Whatsapp {
+        @ColorInt val TEAL_GREEN = Color.rgb(18, 140, 126)
+        @ColorInt val DARK_TEAL_GREEN = Color.rgb(7, 94, 84)
+        @ColorInt val LIGHT_GREEN = Color.rgb(37, 211, 102)
+        @ColorInt val BLUE = Color.rgb(52, 183, 241)
+    }
+
+    /** The official Lyft colors. */
+    object Lyft {
+        @ColorInt val PINK = Color.rgb(255, 0, 191)
+        @ColorInt val BLACK = Color.rgb(17, 17, 31)
+    }
+
+    /** The official Airbnb colors. */
+    object Airbnb {
+        @ColorInt val RAUSCH = Color.rgb(255, 90, 95)
+        @ColorInt val BABU = Color.rgb(0, 166, 153)
+        @ColorInt val ARCHES = Color.rgb(252, 100, 45)
+        @ColorInt val HOF = Color.rgb(72, 72, 72)
+        @ColorInt val FOGGY = Color.rgb(118, 118, 118)
+    }
+
+    /** The official Slack colors. */
+    object Slack {
+        @ColorInt val LIGHT_BLUE = Color.rgb(54, 197, 240)
+        @ColorInt val GREEN = Color.rgb(46, 182, 125)
+        @ColorInt val RED = Color.rgb(224, 30, 90)
+        @ColorInt val YELLOW = Color.rgb(236, 178, 46)
+    }
+
+    /** The official IBM colors. */
+    object IBM {
+        @ColorInt val BLUE = Color.rgb(75, 107, 175)
+    }
+
+    /** The official Oracle colors. */
+    object Oracle {
+        @ColorInt val RED = Color.rgb(248, 0, 0)
+    }
 
 }
