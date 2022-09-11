@@ -91,8 +91,6 @@ Changelog
   
 * **1.0.0**
     * Initial release
-<<<<<<< HEAD
-=======
 
 
 License
@@ -112,4 +110,3 @@ License
     See the License for the specific language governing permissions and
     limitations under the License.
 ```
->>>>>>> 777ee80 (Added design colors for mainstream brands)
