@@ -2,6 +2,7 @@ package com.blueiobase.api.android.designcolors
 
 import android.graphics.Color
 import androidx.annotation.ColorInt
+import androidx.core.graphics.ColorUtils
 
 /**
  * DesignColors is a Kotlin Singleton object that provides access to:
@@ -14,9 +15,31 @@ import androidx.annotation.ColorInt
  */
 object DesignColors {
 
-    /**
-     * The Material Design color system helps you apply color to your UI in a meaningful way.
-     */
+    /** Utility class for the [DesignColors] library. */
+    object Util {
+
+        /**
+         * Adds transparency to the provided [color].
+         * 
+         * @param color The color to which an alpha value would be added.
+         * @param alphaValue The alpha value in floats. Range: (0F-1F)
+         * @return A color [Int] with the provided alpha value.
+         */
+        fun addAlpha(@ColorInt color: Int, alphaValue: Int) = Color.argb(alphaValue, Color.red(color), Color.green(color), Color.blue(color))
+
+        /**
+         * Validates if the given color is a light or dark color.
+         *
+         * @param color The color whose brightness should be determined.
+         * @return `true` if [color] is a dark color, `false` if otherwise.
+         */
+        fun isDarkColor(color: Int): Boolean {
+            val darkness = (1 - (0.2126 * Color.red(color) + 0.7152 * Color.green(color) + 0.0722 * Color.blue(color)) / 255 * (Color.alpha(color) / 255))
+            return darkness >= 0.5
+        }
+    }
+
+    /** The Material Design color system helps you apply color to your UI in a meaningful way. */
     object MaterialDesign {
 
         @ColorInt val RED_50 = Color.rgb(255, 235, 238)
@@ -295,99 +318,61 @@ object DesignColors {
         @ColorInt val WHITE = Color.WHITE
         @ColorInt val BLACK = Color.BLACK
 
-        /**
-         * An array containing all 14 Material RED colors.
-         */
+        /** An array containing all 14 Material RED colors. */
         val redColorArray = intArrayOf(RED_50, RED_100, RED_200, RED_300, RED_400, RED_500, RED_600, RED_700, RED_800, RED_900, RED_A100, RED_A200, RED_A400, RED_A700)
 
-        /**
-         * An array containing all 14 Material PINK colors.
-         */
+        /** An array containing all 14 Material PINK colors. */
         val pinkColorArray = intArrayOf(PINK_50, PINK_100, PINK_200, PINK_300, PINK_400, PINK_500, PINK_600, PINK_700, PINK_800, PINK_900, PINK_A100, PINK_A200, PINK_A400, PINK_A700)
 
-        /**
-         * An array containing all 14 Material PURPLE colors.
-         */
+        /** An array containing all 14 Material PURPLE colors. */
         val purpleColorArray = intArrayOf(PURPLE_50, PURPLE_100, PURPLE_200, PURPLE_300, PURPLE_400, PURPLE_500, PURPLE_600, PURPLE_700, PURPLE_800, PURPLE_900, PURPLE_A100, PURPLE_A200, PURPLE_A400, PURPLE_A700)
 
-        /**
-         * An array containing all 14 Material DEEP PURPLE colors.
-         */
+        /** An array containing all 14 Material DEEP PURPLE colors. */
         val deepPurpleColorArray = intArrayOf(DEEP_PURPLE_50, DEEP_PURPLE_100, DEEP_PURPLE_200, DEEP_PURPLE_300, DEEP_PURPLE_400, DEEP_PURPLE_500, DEEP_PURPLE_600, DEEP_PURPLE_700, DEEP_PURPLE_800, DEEP_PURPLE_900, DEEP_PURPLE_A100, DEEP_PURPLE_A200, DEEP_PURPLE_A400, DEEP_PURPLE_A700)
 
-        /**
-         * An array containing all 14 Material INDIGO colors.
-         */
+        /** An array containing all 14 Material INDIGO colors. */
         val indigoColorArray = intArrayOf(INDIGO_50, INDIGO_100, INDIGO_200, INDIGO_300, INDIGO_400, INDIGO_500, INDIGO_600, INDIGO_700, INDIGO_800, INDIGO_900, INDIGO_A100, INDIGO_A200, INDIGO_A400, INDIGO_A700)
 
-        /**
-         * An array containing all 14 Material BLUE colors.
-         */
+        /** An array containing all 14 Material BLUE colors. */
         val blueColorArray = intArrayOf(BLUE_50, BLUE_100, BLUE_200, BLUE_300, BLUE_400, BLUE_500, BLUE_600, BLUE_700, BLUE_800, BLUE_900, BLUE_A100, BLUE_A200, BLUE_A400, BLUE_A700)
 
-        /**
-         * An array containing all 14 Material LIGHT BLUE colors.
-         */
+        /** An array containing all 14 Material LIGHT BLUE colors. */
         val lightBlueColorArray = intArrayOf(LIGHT_BLUE_50, LIGHT_BLUE_100, LIGHT_BLUE_200, LIGHT_BLUE_300, LIGHT_BLUE_400, LIGHT_BLUE_500, LIGHT_BLUE_600, LIGHT_BLUE_700, LIGHT_BLUE_800, LIGHT_BLUE_900, LIGHT_BLUE_A100, LIGHT_BLUE_A200, LIGHT_BLUE_A400, LIGHT_BLUE_A700)
 
-        /**
-         * An array containing all 14 Material  CYAN colors.
-         */
+        /** An array containing all 14 Material  CYAN colors. */
         val cyanColorArray = intArrayOf(CYAN_50, CYAN_100, CYAN_200, CYAN_300, CYAN_400, CYAN_500, CYAN_600, CYAN_700, CYAN_800, CYAN_900, CYAN_A100, CYAN_A200, CYAN_A400, CYAN_A700)
 
-        /**
-         * An array containing all 14 Material TEAL colors.
-         */
+        /** An array containing all 14 Material TEAL colors. */
         val tealColorArray = intArrayOf(TEAL_50, TEAL_100, TEAL_200, TEAL_300, TEAL_400, TEAL_500, TEAL_600, TEAL_700, TEAL_800, TEAL_900, TEAL_A100, TEAL_A200, TEAL_A400, TEAL_A700)
 
-        /**
-         * An array containing all 14 Material GREEN colors.
-         */
+        /** An array containing all 14 Material GREEN colors. */
         val greenColorArray = intArrayOf(GREEN_50, GREEN_100, GREEN_200, GREEN_300, GREEN_400, GREEN_500, GREEN_600, GREEN_700, GREEN_800, GREEN_900, GREEN_A100, GREEN_A200, GREEN_A400, GREEN_A700)
 
-        /**
-         * An array containing all 14 Material LIGHT GREEN colors.
-         */
+        /** An array containing all 14 Material LIGHT GREEN colors. */
         val lightGreenColorArray = intArrayOf(LIGHT_GREEN_50, LIGHT_GREEN_100, LIGHT_GREEN_200, LIGHT_GREEN_300, LIGHT_GREEN_400, LIGHT_GREEN_500, LIGHT_GREEN_600, LIGHT_GREEN_700, LIGHT_GREEN_800, LIGHT_GREEN_900, LIGHT_GREEN_A100, LIGHT_GREEN_A200, LIGHT_GREEN_A400, LIGHT_GREEN_A700)
 
-        /**
-         * An array containing all 14 Material LIME colors.
-         */
+        /** An array containing all 14 Material LIME colors. */
         val limeColorArray = intArrayOf(LIME_50, LIME_100, LIME_200, LIME_300, LIME_400, LIME_500, LIME_600, LIME_700, LIME_800, LIME_900, LIME_A100, LIME_A200, LIME_A400, LIME_A700)
 
-        /**
-         * An array containing all 14 Material YELLOW colors.
-         */
+        /**  An array containing all 14 Material YELLOW colors. */
         val yellowColorArray = intArrayOf(YELLOW_50, YELLOW_100, YELLOW_200, YELLOW_300, YELLOW_400, YELLOW_500, YELLOW_600, YELLOW_700, YELLOW_800, YELLOW_900, YELLOW_A100, YELLOW_A200, YELLOW_A400, YELLOW_A700)
 
-        /**
-         * An array containing all 14 Material AMBER colors.
-         */
+        /** An array containing all 14 Material AMBER colors. */
         val amberColorArray = intArrayOf(AMBER_50, AMBER_100, AMBER_200, AMBER_300, AMBER_400, AMBER_500, AMBER_600, AMBER_700, AMBER_800, AMBER_900, AMBER_A100, AMBER_A200, AMBER_A400, AMBER_A700)
 
-        /**
-         * An array containing all 14 Material ORANGE colors.
-         */
+        /** An array containing all 14 Material ORANGE colors. */
         val orangeColorArray = intArrayOf(ORANGE_50, ORANGE_100, ORANGE_200, ORANGE_300, ORANGE_400, ORANGE_500, ORANGE_600, ORANGE_700, ORANGE_800, ORANGE_900, ORANGE_A100, ORANGE_A200, ORANGE_A400, ORANGE_A700)
 
-        /**
-         * An array containing all 14 Material DEEP ORANGE colors.
-         */
+        /** An array containing all 14 Material DEEP ORANGE colors. */
         val deepOrangeColorArray = intArrayOf(DEEP_ORANGE_50, DEEP_ORANGE_100, DEEP_ORANGE_200, DEEP_ORANGE_300, DEEP_ORANGE_400, DEEP_ORANGE_500, DEEP_ORANGE_600, DEEP_ORANGE_700, DEEP_ORANGE_800, DEEP_ORANGE_900, DEEP_ORANGE_A100, DEEP_ORANGE_A200, DEEP_ORANGE_A400, DEEP_ORANGE_A700)
 
-        /**
-         * An array containing all 10 Material BROWN colors.
-         */
+        /** An array containing all 10 Material BROWN colors. */
         val brownColorArray = intArrayOf(BROWN_50, BROWN_100, BROWN_200, BROWN_300, BROWN_400, BROWN_500, BROWN_600, BROWN_700, BROWN_800, BROWN_900)
 
-        /**
-         * An array containing all 10 Material PINK colors.
-         */
+        /** An array containing all 10 Material PINK colors. */
         val greyColorArray = intArrayOf(GREY_50, GREY_100, GREY_200, GREY_300, GREY_400, GREY_500, GREY_600, GREY_700, GREY_800, GREY_900)
 
-        /**
-         * An array containing all 10 Material BLUE GREY colors.
-         */
+        /** An array containing all 10 Material BLUE GREY colors. */
         val blueGreyColorArray = intArrayOf(BLUE_GREY_50, BLUE_GREY_100, BLUE_GREY_200, BLUE_GREY_300, BLUE_GREY_400, BLUE_GREY_500, BLUE_GREY_600, BLUE_GREY_700, BLUE_GREY_800, BLUE_GREY_900)
 
         private val arrayOfAllColorArrays = arrayOf(
@@ -766,104 +751,64 @@ object DesignColors {
         @ColorInt val MIDNIGHT_BLUE_800 = Color.rgb(28, 40, 51)
         @ColorInt val MIDNIGHT_BLUE_900 = Color.rgb(23, 32, 42)
 
-        /**
-         * An array containing all 10 FlatDesign POMEGRANATE colors.
-         */
+        /** An array containing all 10 FlatDesign POMEGRANATE colors. */
         val pomegranateColorArray = intArrayOf( POMEGRANATE_50, POMEGRANATE_100, POMEGRANATE_200, POMEGRANATE_300, POMEGRANATE_400, POMEGRANATE_500, POMEGRANATE_600, POMEGRANATE_700, POMEGRANATE_800, POMEGRANATE_900)
 
-        /**
-         * An array containing all 10 FlatDesign ALIZARIN colors.
-         */
+        /** An array containing all 10 FlatDesign ALIZARIN colors. */
         val alizarinColorArray = intArrayOf( ALIZARIN_50, ALIZARIN_100, ALIZARIN_200, ALIZARIN_300, ALIZARIN_400, ALIZARIN_500, ALIZARIN_600, ALIZARIN_700, ALIZARIN_800, ALIZARIN_900)
 
-        /**
-         * An array containing all 10 FlatDesign AMETHYST colors.
-         */
+        /** An array containing all 10 FlatDesign AMETHYST colors. */
         val amethystColorArray = intArrayOf( AMETHYST_50, AMETHYST_100, AMETHYST_200, AMETHYST_300, AMETHYST_400, AMETHYST_500, AMETHYST_600, AMETHYST_700, AMETHYST_800, AMETHYST_900)
 
-        /**
-         * An array containing all 10 FlatDesign WISTERIA colors.
-         */
+        /** An array containing all 10 FlatDesign WISTERIA colors. */
         val wisteriaColorArray = intArrayOf( WISTERIA_50, WISTERIA_100, WISTERIA_200, WISTERIA_300, WISTERIA_400, WISTERIA_500, WISTERIA_600, WISTERIA_700, WISTERIA_800, WISTERIA_900)
 
-        /**
-         * An array containing all 10 FlatDesign BELIZE HOLE colors.
-         */
+        /** An array containing all 10 FlatDesign BELIZE HOLE colors. */
         val belizeHoleColorArray = intArrayOf( BELIZE_HOLE_50, BELIZE_HOLE_100, BELIZE_HOLE_200, BELIZE_HOLE_300, BELIZE_HOLE_400, BELIZE_HOLE_500, BELIZE_HOLE_600, BELIZE_HOLE_700, BELIZE_HOLE_800, BELIZE_HOLE_900)
 
-        /**
-         * An array containing all 10 FlatDesign PETER RIVER colors.
-         */
+        /** An array containing all 10 FlatDesign PETER RIVER colors. */
         val peterRiverColorArray = intArrayOf( PETER_RIVER_50, PETER_RIVER_100, PETER_RIVER_200, PETER_RIVER_300, PETER_RIVER_400, PETER_RIVER_500, PETER_RIVER_600, PETER_RIVER_700, PETER_RIVER_800, PETER_RIVER_900)
 
-        /**
-         * An array containing all 10 FlatDesign TORQUOISE colors.
-         */
+        /** An array containing all 10 FlatDesign TORQUOISE colors. */
         val torquoiseColorArray = intArrayOf( TORQUOISE_50, TORQUOISE_100, TORQUOISE_200, TORQUOISE_300, TORQUOISE_400, TORQUOISE_500, TORQUOISE_600, TORQUOISE_700, TORQUOISE_800, TORQUOISE_900)
 
-        /**
-         * An array containing all 10 FlatDesign GREEN SEA colors.
-         */
+        /** An array containing all 10 FlatDesign GREEN SEA colors. */
         val greenSeaColorArray = intArrayOf( GREEN_SEA_50, GREEN_SEA_100, GREEN_SEA_200, GREEN_SEA_300, GREEN_SEA_400, GREEN_SEA_500, GREEN_SEA_600, GREEN_SEA_700, GREEN_SEA_800, GREEN_SEA_900)
 
-        /**
-         * An array containing all 10 FlatDesign NEPHRITIS colors.
-         */
+        /** An array containing all 10 FlatDesign NEPHRITIS colors. */
         val nephritisColorArray = intArrayOf( NEPHRITIS_50, NEPHRITIS_100, NEPHRITIS_200, NEPHRITIS_300, NEPHRITIS_400, NEPHRITIS_500, NEPHRITIS_600, NEPHRITIS_700, NEPHRITIS_800, NEPHRITIS_900)
 
-        /**
-         * An array containing all 10 FlatDesign EMERALD colors.
-         */
+        /** An array containing all 10 FlatDesign EMERALD colors. */
         val emeraldColorArray = intArrayOf( EMERALD_50, EMERALD_100, EMERALD_200, EMERALD_300, EMERALD_400, EMERALD_500, EMERALD_600, EMERALD_700, EMERALD_800, EMERALD_900)
 
-        /**
-         * An array containing all 10 FlatDesign SUNFLOWER colors.
-         */
+        /** An array containing all 10 FlatDesign SUNFLOWER colors. */
         val sunflowerColorArray = intArrayOf( SUNFLOWER_50, SUNFLOWER_100, SUNFLOWER_200, SUNFLOWER_300, SUNFLOWER_400, SUNFLOWER_500, SUNFLOWER_600, SUNFLOWER_700, SUNFLOWER_800, SUNFLOWER_900)
 
-        /**
-         * An array containing all 10 FlatDesign ORANGE colors.
-         */
+        /** An array containing all 10 FlatDesign ORANGE colors. */
         val orangeColorArray = intArrayOf( ORANGE_50, ORANGE_100, ORANGE_200, ORANGE_300, ORANGE_400, ORANGE_500, ORANGE_600, ORANGE_700, ORANGE_800, ORANGE_900)
 
-        /**
-         * An array containing all 10 FlatDesign CARROT colors.
-         */
+        /** An array containing all 10 FlatDesign CARROT colors. */
         val carrotColorArray = intArrayOf( CARROT_50, CARROT_100, CARROT_200, CARROT_300, CARROT_400, CARROT_500, CARROT_600, CARROT_700, CARROT_800, CARROT_900)
 
-        /**
-         * An array containing all 10 FlatDesign PUMPKIN colors.
-         */
+        /** An array containing all 10 FlatDesign PUMPKIN colors. */
         val pumpkinColorArray = intArrayOf( PUMPKIN_50, PUMPKIN_100, PUMPKIN_200, PUMPKIN_300, PUMPKIN_400, PUMPKIN_500, PUMPKIN_600, PUMPKIN_700, PUMPKIN_800, PUMPKIN_900)
 
-        /**
-         * An array containing all 10 FlatDesign CLOUD colors.
-         */
+        /** An array containing all 10 FlatDesign CLOUD colors. */
         val cloudColorArray = intArrayOf( CLOUD_50, CLOUD_100, CLOUD_200, CLOUD_300, CLOUD_400, CLOUD_500, CLOUD_600, CLOUD_700, CLOUD_800, CLOUD_900)
 
-        /**
-         * An array containing all 10 FlatDesign SILVER colors.
-         */
+        /** An array containing all 10 FlatDesign SILVER colors. */
         val silverColorArray = intArrayOf( SILVER_50, SILVER_100, SILVER_200, SILVER_300, SILVER_400, SILVER_500, SILVER_600, SILVER_700, SILVER_800, SILVER_900)
 
-        /**
-         * An array containing all 10 FlatDesign CONCRETE colors.
-         */
+        /** An array containing all 10 FlatDesign CONCRETE colors. */
         val concreteColorArray = intArrayOf( CONCRETE_50, CONCRETE_100, CONCRETE_200, CONCRETE_300, CONCRETE_400, CONCRETE_500, CONCRETE_600, CONCRETE_700, CONCRETE_800, CONCRETE_900)
 
-        /**
-         * An array containing all 10 FlatDesign ASBESTOS colors.
-         */
+        /** An array containing all 10 FlatDesign ASBESTOS colors. */
         val asbestosColorArray = intArrayOf( ASBESTOS_50, ASBESTOS_100, ASBESTOS_200, ASBESTOS_300, ASBESTOS_400, ASBESTOS_500, ASBESTOS_600, ASBESTOS_700, ASBESTOS_800, ASBESTOS_900)
 
-        /**
-         * An array containing all 10 FlatDesign WET ASPHALT colors.
-         */
+        /** An array containing all 10 FlatDesign WET ASPHALT colors. */
         val wetAsphaltColorArray = intArrayOf( WET_ASPHALT_50, WET_ASPHALT_100, WET_ASPHALT_200, WET_ASPHALT_300, WET_ASPHALT_400, WET_ASPHALT_500, WET_ASPHALT_600, WET_ASPHALT_700, WET_ASPHALT_800, WET_ASPHALT_900)
 
-        /**
-         * An array containing all 10 FlatDesign MIDNIGHT BLUE colors.
-         */
+        /** An array containing all 10 FlatDesign MIDNIGHT BLUE colors. */
         val midNightBlueColorArray = intArrayOf( MIDNIGHT_BLUE_50, MIDNIGHT_BLUE_100, MIDNIGHT_BLUE_200, MIDNIGHT_BLUE_300, MIDNIGHT_BLUE_400, MIDNIGHT_BLUE_500, MIDNIGHT_BLUE_600, MIDNIGHT_BLUE_700, MIDNIGHT_BLUE_800, MIDNIGHT_BLUE_900)
 
         /**
@@ -1017,14 +962,12 @@ object DesignColors {
 
         )
 
-        /**
-         * Picks a random color from one of the [FlatDesign] colors.
-         *
-         */
+        /**  Picks a random color from one of the [FlatDesign] colors.*/
         fun selectRandomColor(): Int {
             val anyColorIntArray = arrayOfAllColorArrays[(arrayOfAllColorArrays.indices).random()]
             return anyColorIntArray[((anyColorIntArray.indices).random())]
         }
     }
+
 
 }
