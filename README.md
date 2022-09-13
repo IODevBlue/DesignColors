@@ -4,12 +4,17 @@ DesignColors
 This is a library that provides a Singleton class containing default colors specified in the: 
 - [Material Color System](https://material.io/design/color/the-color-system.html#color-theme-creation).
 - Flat Design Color system used in web design.
+- Official colors for several mainstream companies: Google, Twitter, Instagram, YouTube etc.
 
 It provides helper methods for selecting random colors in any of these coloring systems.
 
 Uses
 ----
-Use DesignColors when you specifically need to work with Material or Flat Design Colors in Kotlin code.
+Use DesignColors: 
+- When you specifically need to work with Material or Flat Design Colors in Kotlin code.
+- When you need to reference design colors mainstream apps for personal purposes.
+
+This is a singleton class and can directly be copied into your project module.
 
 Material Design Colors
 ----------------------
@@ -77,6 +82,37 @@ val randomMidnightBlueColor = DesignColors.FlatDesign.randomMidNightBlueColor()
 To choose a random Flat Design Color:
 ```KOTLIN
 val randomFlatDesignColor = DesignColors.FlatDesign.selectRandomColor()
+```
+
+Special
+-------
+To choose YouTube Red:
+```KOTLIN
+val youtubeRed = DesignColors.YouTube.RED 
+``` 
+
+To select Snapchat Yellow:
+```KOTLIN
+val snapchatYellow = DesignColors.Snapchat.YELLOW
+``` 
+
+Java Interoperability
+---------------------
+Design Colors is completely interoperable in Java.
+
+To select Material Blue 50:
+```JAVA
+int blue50 = DesignColors.MaterialDesign.INSTANCE.getBLUE_50();
+``` 
+
+To select Flat Design Midnight Blue 50:
+```JAVA
+int midNightBlue50 = DesignColors.FlatDesign.INSTANCE.getMIDNIGHT_BLUE_50();
+```
+
+To select Facebook Messenger's Light Blue:
+```JAVA
+int midNightBlue50 = DesignColors.Facebook.Messenger.INSTANCE.getLIGHT_BLUE();
 ```
 
 Changelog

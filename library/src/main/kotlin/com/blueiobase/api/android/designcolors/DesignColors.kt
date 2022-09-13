@@ -1001,6 +1001,7 @@ object DesignColors {
         @ColorInt val YELLOW = Color.rgb(252, 175, 69)
         @ColorInt val LIGHT_YELLOW = Color.rgb(225, 220, 128)
     }
+
     /** The official YouTube colors. */
     object YouTube {
         @ColorInt val RED = Color.rgb(255, 0, 0)
