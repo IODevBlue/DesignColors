@@ -102,24 +102,33 @@ Design Colors is completely interoperable in Java.
 
 To select Material Blue 50:
 ```JAVA
-int blue50 = DesignColors.MaterialDesign.INSTANCE.getBLUE_50();
+int blue50 = DesignColors.MaterialDesign.getBLUE_50();
 ``` 
 
 To select Flat Design Midnight Blue 50:
 ```JAVA
-int midNightBlue50 = DesignColors.FlatDesign.INSTANCE.getMIDNIGHT_BLUE_50();
+int midNightBlue50 = DesignColors.FlatDesign.getMIDNIGHT_BLUE_50();
 ```
 
 To select Facebook Messenger's Light Blue:
+```JAVA
+int midNightBlue50 = DesignColors.Facebook.Messenger.getLIGHT_BLUE();
+```
+
+Using the `INSTANCE` to access each method and variable for any singleton object is legal however it is a longer syntax.
 ```JAVA
 int midNightBlue50 = DesignColors.Facebook.Messenger.INSTANCE.getLIGHT_BLUE();
 ```
 
 Changelog
 ---------
+* **1.1.2**
+    * Included `@JvmStatic` to ease Java interoperability.
+
 * **1.1.1**
     * Added Utility functions addAlpha() and isDarkColor()
     * Added design colors for popular brands: Google, Twitter, Instagram, Youtube, Pinterest etc.
+  
 * **1.0.1**
     * Changed library name from MaterialPaletteColors to DesignColors to accommodate other design colors.
     * Added Flat Design Colors.
