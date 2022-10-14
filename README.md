@@ -124,9 +124,10 @@ Changelog
 ---------
 * **1.1.2**
     * Included `@JvmStatic` to ease Java interoperability.
+    * Added utility function `getRGB()` and `createColor()`.
 
 * **1.1.1**
-    * Added Utility functions addAlpha() and isDarkColor()
+    * Added Utility functions `addAlpha()` and `isDarkColor()`
     * Added design colors for popular brands: Google, Twitter, Instagram, Youtube, Pinterest etc.
   
 * **1.0.1**

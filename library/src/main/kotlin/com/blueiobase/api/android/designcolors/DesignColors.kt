@@ -2,6 +2,7 @@ package com.blueiobase.api.android.designcolors
 
 import android.graphics.Color
 import androidx.annotation.ColorInt
+import androidx.annotation.IntRange
 import androidx.core.graphics.ColorUtils
 
 /**
@@ -37,6 +38,34 @@ object DesignColors {
         @JvmStatic fun isDarkColor(color: Int): Boolean {
             val darkness = (1 - (0.2126 * Color.red(color) + 0.7152 * Color.green(color) + 0.0722 * Color.blue(color)) / 255 * (Color.alpha(color) / 255))
             return darkness >= 0.5
+        }
+
+        /**
+         * Separates the RGB values of a color integer.
+         *
+         * @param color The color integer.,
+         * @return An [IntArray] containing the RGB values in this order: {red, green, blue}.
+         */
+        @JvmStatic fun getRGB(@ColorInt color: Int): IntArray {
+            val red = (color shr 16) and 0xFF
+            val green = (color shr 8) and 0xFF
+            val blue = color and 0xFF
+            return intArrayOf(red, green, blue)
+        }
+
+        /**
+         * Creates a color from the provided [red], [green] and [blue] values.
+         * @param red The **RED** component
+         * @param green The **GREEN** component
+         * @param blue The **BLUE** component
+         * @return A color [Int].
+         */
+        @JvmStatic fun createColor(
+            @IntRange(from = 0, to = 255) red: Int,
+            @IntRange(from = 0, to = 255) green: Int,
+            @IntRange(from = 0, to = 255) blue: Int
+        ):  Int {
+            return (red shl 16) or (green shl 8) or blue
         }
     }
 
