@@ -13,3 +13,9 @@
 .externalNativeBuild
 .cxx
 local.properties
+trace.log
+/.idea/AndroidProjectSystem.xml
+/.idea/migrations.xml
+/.idea/runConfigurations.xml
+/.idea
+/artefacts
