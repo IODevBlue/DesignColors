@@ -18,13 +18,25 @@ This is a library that provides a Singleton class containing default colors spec
 - [Microsoft Fluent UI](https://developer.microsoft.com/en-us/fluentui#/styles/web/colors)
 - Official Brand Colors: A curated set of official colors from various mainstream companies such as Google, X (formerly Twitter), Instagram, and YouTube, ensuring brand consistency in your UI.
 
+Table of content
+----------------
+- [Uses](https://github.com/IODevBlue/DesignColors/tree/main#uses)
+- [Features](https://github.com/IODevBlue/DesignColors/tree/main#features)
+- [Installation](https://github.com/IODevBlue/DesignColors/tree/main#installation)
+- [Usage](https://github.com/IODevBlue/DesignColors/tree/main#usage)
+- [Java interoperability](https://github.com/IODevBlue/DesignColors/tree/main#java-interoperability)
+- [Configurations](https://github.com/IODevBlue/DesignColors/tree/main#configurations)
+    - [XML attributes](https://github.com/IODevBlue/DesignColors/tree/main#xml-attributes)
+- [Applications using DesignColors](https://github.com/IODevBlue/DesignColors/tree/main#applications-using-DesignColors)
+- [Contributions](https://github.com/IODevBlue/DesignColors/tree/main#contributions)
+- [Changelog](https://github.com/IODevBlue/DesignColors/tree/main#changelog)
+- [License](https://github.com/IODevBlue/DesignColors/tree/main#license)
+
 Uses
 ----
 Use DesignColors: 
-- When you specifically need to work with Material, Flat Design Colors or any other design palette in Kotlin code or multi-platform project.
+- When you specifically need to work with Material, Flat Design Colors or any other design palette in Kotlin code or a multi-platform project using Kotlin.
 - When you need to reference design colors from mainstream apps for personal purposes.
-
-This is a singleton class and can directly be copied into your project module.
 
 Features
 --------
@@ -34,12 +46,38 @@ Features
   - Detect whether a color is light or dark.
   - Extract RGB values or create colors from RGB components.
   - Convert between Android `ColorInt` and Jetpack Compose `Color`.
-
+- Extension functions on a `ColorInt` to convert to a Jetpack Compose `Color`.
 
 Installation
 ------------
-**current-version: v1.2.0**
+**current-version: v1.2.1**
+There are several ways to install this library.
 
+* Grab a JAR artifact from the Maven Central Repository:
+```kotlin
+//build.gradle.kts
+implementation ("io.github.iodevblue:designcolors:${current-version}")
+```
+
+If it is a snapshot version, add the Sonatype OSS Nexus snapshots repository.:
+```kotlin
+//build.gradle.kts
+maven {
+    url = uri("https://central.sonatype.com/repository/maven-snapshots/")
+}
+```
+Then retrieve a copy:
+```kotlin
+//build.gradle.kts
+implementation ("io.github.iodevblue:designcolors:${current-version}-SNAPSHOT")
+```
+
+* Grab a JAR or AAR artifact from the [release](https://github.com/IODevBlue/:repo/releases) section.
+- Place it in `libs` folder in your project module and install in your project.
+```kotlin
+//build.gradle.kts
+implementation(fileTree("libs") { include("*.jar", "*.aar") })
+```
 
 Material Design Colors
 ----------------------
@@ -50,14 +88,25 @@ Material Design Colors
 Usage
 -----
 To select Material Blue 50:
-```KOTLIN
+```kotlin
 val blue50 = DesignColors.MaterialDesign.BLUE_50
 ```
 
 Then apply it to a View or Widget:
-```KOTLIN
+```kotlin
 val textView: TextView = findViewById(R.id.name_textview)
 textView.background = blue50
+```
+
+You can convert the color to a Jetpack Compose Color and use in a composable:
+```kotlin
+Text(
+    text = "Exit", 
+    modifier = modifier
+        .background(DesignColors.MaterialDesign.BLUE_300.toComposeColor(), shape = AbsoluteRoundedCornerShape(10.dp))
+        .padding(20.dp), 
+    color = DesignColors.MaterialDesign.BLUE_50.toComposeColor()
+)
 ```
 
 To retrieve all Material Blue Colors in an Integer Array:
@@ -75,46 +124,12 @@ To choose a random Material Color:
 val randomMaterialColor = DesignColors.MaterialDesign.selectRandomColor()
 ```
 
-Flat Design Colors
-------------------
-<p style="text-align: center;">
-    <img src="/art/flat-design-color-chart.png" alt="Flat Design Color Chart">
-</p>
-
-Usage
------
-To select Flat Design Midnight Blue 50:
-```KOTLIN
-val midNightBlue50 = DesignColors.FlatDesign.MIDNIGHT_BLUE_50
-```
-
-Then apply it to a View or Widget:
-```KOTLIN
-val textView: TextView = findViewById(R.id.email_textview)
-textView.background = midNightBlue50
-```
-
-To retrieve all Flat Design Midnight Blue in an Integer Array:
-```KOTLIN
-val midnightBlueColors = DesignColors.FlatDesign.midNightBlueColorArray
-```
-
-To choose a random Flat Design Midnight Blue Color:
-```KOTLIN
-val randomMidnightBlueColor = DesignColors.FlatDesign.randomMidNightBlueColor()
-```
-
-To choose a random Flat Design Color:
-```KOTLIN
-val randomFlatDesignColor = DesignColors.FlatDesign.selectRandomColor()
-```
-
 Special
 -------
 To choose YouTube Red:
 ```KOTLIN
 val youtubeRed = DesignColors.YouTube.RED 
-``` 
+```
 
 To select Snapchat Yellow:
 ```KOTLIN
@@ -140,13 +155,14 @@ To select Facebook Messenger's Light Blue:
 int midNightBlue50 = DesignColors.Facebook.Messenger.getLIGHT_BLUE();
 ```
 
-Using the `INSTANCE` to access each method and variable for any singleton object is legal however it is a longer syntax.
-```JAVA
-int midNightBlue50 = DesignColors.Facebook.Messenger.INSTANCE.getLIGHT_BLUE();
-```
-
 Changelog
 ---------
+* **1.2.1**
+    * Added extensions to convert between Android colors and Jetpack Compose colors:
+      - `Int.toComposeColor()` – Converts an Android `@ColorInt` Int to a Compose Color.
+      - `Long.toComposeColor()` – Converts a packed ARGB Long to a Compose Color.
+      - `Color.toColorInt()` – Converts a Jetpack Compose Color back to an Android @ColorInt Int.
+
 * **1.2.0**
     * **New Design Systems**: Added color palettes for Apple HIG, Atlassian, Bootstrap and Microsoft Fluent UI.
     * **Compose Color Utilities**: Included new utility functions for converting between Android `ColorInt` and Jetpack Compose `Color` types:
@@ -158,10 +174,6 @@ Changelog
 * **1.1.2**
     * Included `@JvmStatic` to ease Java interoperability.
     * Added utility function `getRGB()` and `createColor()`.
-
-* **1.1.1**
-    * Added Utility functions `addAlpha()` and `isDarkColor()`
-    * Added design colors for popular brands: Google, Twitter, Instagram, Youtube, Pinterest etc.
 
 License
 -------
