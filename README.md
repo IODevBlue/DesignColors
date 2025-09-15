@@ -1,20 +1,40 @@
 DesignColors
 ============
 
+[<img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/IODevBlue/DesignColors?label=Current Version&color=2CCCE4&style=for-the-badge&labelColor=0109B6">](https://github.com/IODevBlue/DesignColors/releases) <img alt="Repository Size" src="https://img.shields.io/github/repo-size/IODevBlue/DesignColors?color=2CCCE4&style=for-the-badge&labelColor=0109B6"> [<img alt="License" src="https://img.shields.io/github/license/IODevBlue/DesignColors?color=2CCCE4&style=for-the-badge&labelColor=0109B6">](http://www.apache.org/licenses/LICENSE-2.0) [<img alt="GitHub Repository stars" src="https://img.shields.io/github/stars/IODevBlue/DesignColors?color=2CCCE4&style=for-the-badge&labelColor=0109B6">](https://github.com/IODevBlue/DesignColors/stargazers)
+<img alt="GitHub watchers" src="https://img.shields.io/github/watchers/IODevBlue/DesignColors?label=Repository Watchers&color=2CCCE4&style=for-the-badge&labelColor=0109B6"> [<img alt="Gradle version" src="https://img.shields.io/static/v1?label=Gradle version&message=8.0.0&color=2CCCE4&style=for-the-badge&labelColor=0109B6">](https://docs.gradle.org/8.0/release-notes) [<img alt="Kotlin version" src="https://img.shields.io/static/v1?label=Kotlin version&message=1.8.20&color=2CCCE4&style=for-the-badge&labelColor=0109B6">](https://KOTLINlang.org/docs/whatsnew1820.html)
+
 This is a library that provides a Singleton class containing default colors specified in the: 
 - [Material Color System](https://material.io/design/color/the-color-system.html#color-theme-creation).
-- Flat Design Color system used in web design.
-- Official colors for several mainstream companies: Google, Twitter, Instagram, YouTube etc.
-
-It provides helper methods for selecting random colors in any of these coloring systems.
+- [Flat UI Colors](https://flatuicolors.com/)
+- [Apple Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/foundations/color)
+- [Atlassian Design System](https://atlassian.design/foundations/color/)
+- [Bootstrap](https://getbootstrap.com/docs/5.3/customize/color/)
+- [Microsoft Fluent UI](https://developer.microsoft.com/en-us/fluentui#/styles/web/colors)
+- Official Brand Colors: A curated set of official colors from various mainstream companies such as Google, X (formerly Twitter), Instagram, and YouTube, ensuring brand consistency in your UI.
 
 Uses
 ----
 Use DesignColors: 
-- When you specifically need to work with Material or Flat Design Colors in Kotlin code.
-- When you need to reference design colors mainstream apps for personal purposes.
+- When you specifically need to work with Material, Flat Design Colors or any other design palette in Kotlin code or multi-platform project.
+- When you need to reference design colors from mainstream apps for personal purposes.
 
 This is a singleton class and can directly be copied into your project module.
+
+Features
+--------
+- Supports conversion from and to Jetpack Compose [Color](https://developer.android.com/reference/kotlin/androidx/compose/ui/graphics/Color) class.
+- Utility functions for working with colors:
+  - Add alpha transparency (int or float values).
+  - Detect whether a color is light or dark.
+  - Extract RGB values or create colors from RGB components.
+  - Convert between Android `ColorInt` and Jetpack Compose `Color`.
+
+
+Installation
+------------
+**current-version: v1.2.0**
+
 
 Material Design Colors
 ----------------------
@@ -122,6 +142,14 @@ int midNightBlue50 = DesignColors.Facebook.Messenger.INSTANCE.getLIGHT_BLUE();
 
 Changelog
 ---------
+* **1.2.0**
+    * **New Design Systems**: Added color palettes for Apple HIG, Atlassian, Bootstrap and Microsoft Fluent UI.
+    * **Compose Color Utilities**: Included new utility functions for converting between Android `ColorInt` and Jetpack Compose `Color` types:
+      - `toComposeColor(@ColorInt color: Int)`
+      - `toComposeColor(color: Long)`
+      - `fromComposeColor(color: androidx.compose.ui.graphics.Color)`
+    * **Expanded Brand Colors**: Added colors for X (formerly Twitter).
+  
 * **1.1.2**
     * Included `@JvmStatic` to ease Java interoperability.
     * Added utility function `getRGB()` and `createColor()`.
@@ -129,20 +157,11 @@ Changelog
 * **1.1.1**
     * Added Utility functions `addAlpha()` and `isDarkColor()`
     * Added design colors for popular brands: Google, Twitter, Instagram, Youtube, Pinterest etc.
-  
-* **1.0.1**
-    * Changed library name from MaterialPaletteColors to DesignColors to accommodate other design colors.
-    * Added Flat Design Colors.
-    * Changed color constants to RGB values.
-  
-* **1.0.0**
-    * Initial release
-
 
 License
 -------
 ```
-    Copyright 2022 IO DevBlue
+    Copyright 2022-2025 IO DevBlue
     
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
