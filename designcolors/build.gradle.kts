@@ -15,8 +15,8 @@ plugins {
 
 val groupID = "io.github.iodevblue"
 val moduleID = "designcolors"
-val previousVersion = "1.1.2"
-val releaseVersion = "1.2.0-SNAPSHOT"
+val previousVersion = "1.2.0"
+val releaseVersion = "1.2.1"
 val releaseTitle = "Design Colors"
 val releaseTitleNoSpaces = releaseTitle.replace(" ", "")
 
@@ -65,7 +65,7 @@ android {
 jreleaser {
     gitRootSearch.set(true)
     deploy {
-        setActive("NEVER")
+        setActive("ALWAYS")
         maven {
             mavenCentral {
                 create("sonatype") {
@@ -114,10 +114,6 @@ jreleaser {
                 // Run the bundleReleaseAar to generate the below file.
                 setPath("${rootProject.projectDir}/artefacts/${moduleID}/${releaseVersion}/${releaseTitleNoSpaces}_v${releaseVersion}.aar")
             }
-//            artifact {
-//                // Run the androidExportProjectZip to generate the below file.
-//                setPath("${rootProject.projectDir}/artefacts/${moduleID}/${releaseVersion}/${releaseTitleNoSpaces}_v${releaseVersion}.zip")
-//            }
         }
     }
 //    files {
@@ -173,7 +169,7 @@ jreleaser {
                 categoryTitleFormat = "### {{categoryTitle}}"
                 contributorsTitleFormat = "### Contributors"
                 content = "#Changelog\n\n{{changelogChanges}}\n{{changelogContributors}}"
-                previousTagName = previousVersion
+                previousTagName = "v$previousVersion"
                 contributors {
                     enabled = true
                     format = "- {{contributorName}} ({{contributorUsernameAsLink}})"
@@ -189,13 +185,13 @@ jreleaser {
                     )
                 }
 
-                includeLabels = setOf(
-                    "issue"
-                )
-
-                excludeLabels = setOf(
-                    "issue"
-                )
+//                includeLabels = setOf(
+//                    "issue"
+//                )
+//
+//                excludeLabels = setOf(
+//                    "issue"
+//                )
 
                 labeler {
                     label = "issue"
@@ -387,6 +383,7 @@ configurations.all {
 tasks.named("jreleaserFullRelease") {
     dependsOn(androidAar)
     dependsOn(androidExportProjectZip)
+    dependsOn(":$moduleID:publish")
 }
 
 tasks.named("jreleaserAutoConfigRelease") {
@@ -395,6 +392,14 @@ tasks.named("jreleaserAutoConfigRelease") {
 }
 
 tasks.named("jreleaserRelease") {
+    dependsOn(androidAar)
+    dependsOn(androidExportProjectZip)
+    dependsOn(":$moduleID:publish")
+}
+
+tasks.named("jreleaserPublish") {
+    dependsOn(androidAar)
+    dependsOn(androidExportProjectZip)
     dependsOn(":$moduleID:publish")
 }
 
@@ -597,6 +602,12 @@ tasks.register<Copy>("copyJavadoc") {
     from(provider { tasks.named("dokkaJavadoc").get().outputs.files })
     into("/Users/iodevblue/Documents/Github-Projects/project-docs/api/android/$moduleID/javadoc")
 }
+
+tasks.named<Delete>("clean") {
+    delete("${rootProject.projectDir}/artefacts/")
+}
+
+
 
 configurations.all {
     resolutionStrategy {
