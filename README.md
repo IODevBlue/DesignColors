@@ -1,8 +1,13 @@
 DesignColors
 ============
 
-[<img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/IODevBlue/DesignColors?label=Current Version&color=2CCCE4&style=for-the-badge&labelColor=0109B6">](https://github.com/IODevBlue/DesignColors/releases) <img alt="Repository Size" src="https://img.shields.io/github/repo-size/IODevBlue/DesignColors?color=2CCCE4&style=for-the-badge&labelColor=0109B6"> [<img alt="License" src="https://img.shields.io/github/license/IODevBlue/DesignColors?color=2CCCE4&style=for-the-badge&labelColor=0109B6">](http://www.apache.org/licenses/LICENSE-2.0) [<img alt="GitHub Repository stars" src="https://img.shields.io/github/stars/IODevBlue/DesignColors?color=2CCCE4&style=for-the-badge&labelColor=0109B6">](https://github.com/IODevBlue/DesignColors/stargazers)
-<img alt="GitHub watchers" src="https://img.shields.io/github/watchers/IODevBlue/DesignColors?label=Repository Watchers&color=2CCCE4&style=for-the-badge&labelColor=0109B6"> [<img alt="Gradle version" src="https://img.shields.io/static/v1?label=Gradle version&message=9.0.0&color=2CCCE4&style=for-the-badge&labelColor=0109B6">](https://docs.gradle.org/9.0.0/release-notes) [<img alt="Kotlin version" src="https://img.shields.io/static/v1?label=Kotlin version&message=2.2.20&color=2CCCE4&style=for-the-badge&labelColor=0109B6">](https://kotlinlang.org/docs/whatsnew2220.html)
+[<img alt="Current Version" src="https://img.shields.io/github/release/IODevBlue/DesignColors?label=Current Version&color=2CCCE4&style=for-the-badge&labelColor=0109B6">](https://github.com/IODevBlue/DesignColors/releases)
+<img alt="Repo Size" src="https://img.shields.io/github/repo-size/IODevBlue/DesignColors?color=2CCCE4&style=for-the-badge&labelColor=0109B6">
+[<img alt="License" src="https://img.shields.io/github/license/IODevBlue/DesignColors?color=2CCCE4&style=for-the-badge&labelColor=0109B6">](http://www.apache.org/licenses/LICENSE-2.0)
+[<img alt="Stars" src="https://img.shields.io/github/stars/IODevBlue/DesignColors?color=2CCCE4&style=for-the-badge&labelColor=0109B6">](https://github.com/IODevBlue/DesignColors/stargazers)
+<img alt="Subscribers" src="https://img.shields.io/github/subscribers/IODevBlue/DesignColors?style=for-the-badge&color=2CCCE4&labelColor=0109B6">
+[<img alt="Gradle version" src="https://img.shields.io/static/v1?label=Gradle&message=9.0.0&color=2CCCE4&style=for-the-badge&labelColor=0109B6">](https://docs.gradle.org/9.0.0/release-notes)
+[<img alt="Kotlin version" src="https://img.shields.io/static/v1?label=Kotlin&message=1.9.10&color=2CCCE4&style=for-the-badge&labelColor=0109B6">](https://kotlinlang.org/docs/whatsnew1910.html)
 
 This is a library that provides a Singleton class containing default colors specified in the: 
 - [Material Color System](https://material.io/design/color/the-color-system.html#color-theme-creation).
@@ -38,7 +43,7 @@ Installation
 
 Material Design Colors
 ----------------------
-<p align="center">
+<p style="text-align: center;">
     <img src="/art/material-design-color-chart.png" alt="Material Design Color Chart">
 </p>
 
@@ -72,7 +77,7 @@ val randomMaterialColor = DesignColors.MaterialDesign.selectRandomColor()
 
 Flat Design Colors
 ------------------
-<p align="center">
+<p style="text-align: center;">
     <img src="/art/flat-design-color-chart.png" alt="Flat Design Color Chart">
 </p>
 
