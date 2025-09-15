@@ -1,11 +1,11 @@
 DesignColors
 ============
 
-[<img alt="Current Version" src="https://img.shields.io/github/release/IODevBlue/DesignColors?label=Current Version&color=2CCCE4&style=for-the-badge&labelColor=0109B6">](https://github.com/IODevBlue/DesignColors/releases)
+[![Current Version](https://img.shields.io/github/v/tag/IODevBlue/DesignColors?label=Current%20Version&color=2CCCE4&style=for-the-badge&labelColor=0109B6)](https://github.com/IODevBlue/DesignColors/releases)
 <img alt="Repo Size" src="https://img.shields.io/github/repo-size/IODevBlue/DesignColors?color=2CCCE4&style=for-the-badge&labelColor=0109B6">
 [<img alt="License" src="https://img.shields.io/github/license/IODevBlue/DesignColors?color=2CCCE4&style=for-the-badge&labelColor=0109B6">](http://www.apache.org/licenses/LICENSE-2.0)
 [<img alt="Stars" src="https://img.shields.io/github/stars/IODevBlue/DesignColors?color=2CCCE4&style=for-the-badge&labelColor=0109B6">](https://github.com/IODevBlue/DesignColors/stargazers)
-<img alt="Subscribers" src="https://img.shields.io/github/subscribers/IODevBlue/DesignColors?style=for-the-badge&color=2CCCE4&labelColor=0109B6">
+![Watchers](https://img.shields.io/github/watchers/IODevBlue/DesignColors?label=Watchers&style=for-the-badge&color=2CCCE4&labelColor=0109B6)
 [<img alt="Gradle version" src="https://img.shields.io/static/v1?label=Gradle&message=9.0.0&color=2CCCE4&style=for-the-badge&labelColor=0109B6">](https://docs.gradle.org/9.0.0/release-notes)
 [<img alt="Kotlin version" src="https://img.shields.io/static/v1?label=Kotlin&message=1.9.10&color=2CCCE4&style=for-the-badge&labelColor=0109B6">](https://kotlinlang.org/docs/whatsnew1910.html)
 
