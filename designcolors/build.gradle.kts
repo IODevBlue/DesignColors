@@ -1,6 +1,7 @@
 import org.jreleaser.model.Active
 import org.jreleaser.model.Changelog
 import org.jreleaser.model.Stereotype
+import org.jreleaser.model.UpdateSection
 import java.net.URI
 
 plugins {
@@ -15,10 +16,11 @@ plugins {
 
 val groupID = "io.github.iodevblue"
 val moduleID = "designcolors"
-val previousVersion = "1.2.0"
+val previousVersion = "1.1.2"
 val releaseVersion = "1.2.1"
 val releaseTitle = "Design Colors"
 val releaseTitleNoSpaces = releaseTitle.replace(" ", "")
+val repositoryUrl = "github.com/IODevBlue/DesignColors"
 
 group = groupID
 version = releaseVersion
@@ -89,7 +91,7 @@ afterEvaluate {
                     name.set(rootProject.name)
                     description.set("A Kotlin library for predefined color palettes from popular design systems and brands.")
                     packaging = "jar"
-                    url.set("https://github.com/IODevBlue/DesignColors.git")
+                    url.set("https://${repositoryUrl}.git")
                     developers {
                         developer {
                             id.set("iodevblue")
@@ -104,9 +106,9 @@ afterEvaluate {
                         }
                     }
                     scm {
-                        connection.set("scm:git:git://github.com/IODevBlue/DesignColors.git")
-                        developerConnection.set("scm:git:ssh://github.com/IODevBlue/DesignColors.git")
-                        url.set("https://github.com/IODevBlue/DesignColors")
+                        connection.set("scm:git:git://${repositoryUrl}.git")
+                        developerConnection.set("scm:git:ssh://${repositoryUrl}.git")
+                        url.set("https://${repositoryUrl}")
                     }
                 }
             }
@@ -127,7 +129,7 @@ jreleaser {
         maven {
             mavenCentral {
                 create("sonatype") {
-                    setActive("RELEASE")
+                    setActive(Active.RELEASE.name)
                     stagingRepository("build/staging-deploy")
                     applyMavenCentralRules = true
                     checksums = false
@@ -161,16 +163,18 @@ jreleaser {
     }
     distributions {
         create("release") {
-            tag(releaseVersion)
+            tag("v$releaseVersion")
             artifact {
-                // Run the bundleReleaseAar to generate the below file.
                 setPath("${rootProject.projectDir}/artefacts/${moduleID}/${releaseVersion}/${releaseTitleNoSpaces}_v${releaseVersion}.aar")
+            }
+            artifact {
+                setPath("${rootProject.projectDir}/artefacts/${moduleID}/${releaseVersion}/${releaseTitleNoSpaces}_v${releaseVersion}.jar")
             }
         }
     }
     files {
         setActive("ALWAYS")
-        artifact { }
+//        artifact { }
     }
     project {
         authors = listOf(
@@ -179,22 +183,25 @@ jreleaser {
         name = releaseTitle
         copyright = "2022-2025 IO DevBlue"
         description = "A Kotlin library for predefined color palettes from popular design systems and brands."
+        inceptionYear = "2022"
         longDescription = "A Kotlin color library providing a singleton with predefined color palettes from major design systems like Material Design, Apple HIG, Atlassian, Bootstrap and Fluent UI, along with a curated set of official brand colors. It includes helper methods for dynamic color selection."
         license = "Apache-2.0"
         stereotype = Stereotype.MOBILE
         vendor = "IO DevBlue"
         version = releaseVersion
         versionPattern = "SEMVER"
+//        icon {  }
         links {
-            bugTracker = "https://github.com/IODevBlue/DesignColors/issues"
+            bugTracker = "https://${repositoryUrl}/issues"
             contact = "https://github.com/IODevBlue"
-            documentation = "https://github.com/IODevBlue/DesignColors/blob/main/README.md"
-            homepage = "https://github.com/IODevBlue/DesignColors"
+            documentation = "https://${repositoryUrl}/blob/main/README.md"
+            homepage = "https://${repositoryUrl}"
             license = "https://www.apache.org/licenses/LICENSE-2.0"
-            vcsBrowser =  "https://github.com/IODevBlue/DesignColors"
+            vcsBrowser =  "https://${repositoryUrl}"
             version = releaseVersion
         }
         maintainer("IO DevBlue")
+//        screenshot { }
         tag(releaseVersion)
     }
     release {
@@ -203,45 +210,62 @@ jreleaser {
             checksums = false
             draft = false
             enabled = true
-            readTimeout = 60
-            releaseName = "v$releaseVersion"
-            repoOwner = "IO DevBlue"
-            repoUrl = "https://github.com/IODevBlue/DesignColors"
-            tagName.set(releaseVersion)
             overwrite = true
+            previousTagName = previousVersion
+            readTimeout = 60
+            repoUrl = "https://${repositoryUrl}"
+            releaseName = "$releaseTitle v$releaseVersion"
+            sign = true
+            skipRelease = false
+            skipTag = false
             signatures = false
+            setUploadAssets(Active.ALWAYS.formatted())
             changelog {
                 categoryTitleFormat = "### {{categoryTitle}}"
                 contributorsTitleFormat = "### Contributors"
-                content = "#Changelog\n\n{{changelogChanges}}\n{{changelogContributors}}"
+                content = "\n\n{{changelogChanges}}\n{{changelogContributors}}"
                 enabled = true
                 excludeLabels = setOf()
                 format = "- {{commitShortHash}} {{commitTitle}}"
                 formatted = Active.ALWAYS
-                preset = "gitmoji"
-                previousTagName = "v$previousVersion"
+                preset = "conventional"
                 sort = Changelog.Sort.DESC
+
                 contributors {
                     enabled = true
                     format = "- {{contributorName}} ({{contributorUsernameAsLink}})"
                 }
+
                 hide {
-                    categories = setOf(
-                        "merge"
-                    )
-                    contributors = setOf(
-                        "[bot]"
-                    )
-                    uncategorized = true
+                    categories = setOf("merge")
+                    contributors = setOf("[bot]")
+                    uncategorized = false
                 }
 
-                labeler {
-                    label = "issue"
-                    title = "regex:fix:"
-                    body = "Fixes #"
-                    contributor = "GitHub"
-                    order = 1
-                }
+                // 🔖 Labelers
+                labeler { label = "build";      title = "regex:^(build)(\\(.*\\))?:"; order = 1 }
+                labeler { label = "ci";         title = "regex:^(ci)(\\(.*\\))?:";    order = 2 }
+                labeler { label = "deps";       title = "regex:^(deps)(\\(.*\\))?:";  order = 3 }
+                labeler { label = "bug";        title = "regex:^(bug)(\\(.*\\))?:";   order = 4 }
+                labeler { label = "fix";        title = "regex:^(fix)(\\(.*\\))?:";   order = 5 }
+                labeler { label = "hotfix";     title = "regex:^(hotfix)(\\(.*\\))?:";order = 6 }
+                labeler { label = "security";   title = "regex:^(security)(\\(.*\\))?:"; order = 7 }
+                labeler { label = "feat";       title = "regex:^(feat)(\\(.*\\))?:";  order = 8 }
+                labeler { label = "breaking";   title = "regex:^(breaking)(\\(.*\\))?:"; order = 9 }
+                labeler { label = "perf";       title = "regex:^(perf)(\\(.*\\))?:";  order = 10 }
+                labeler { label = "refactor";   title = "regex:^(refactor)(\\(.*\\))?:"; order = 11 }
+                labeler { label = "ref";        title = "regex:^(ref)(\\(.*\\))?:";   order = 12 }
+                labeler { label = "revert";     title = "regex:^(revert)(\\(.*\\))?:";order = 13 }
+                labeler { label = "style";      title = "regex:^(style)(\\(.*\\))?:"; order = 14 }
+                labeler { label = "test";       title = "regex:^(test)(\\(.*\\))?:";  order = 15 }
+                labeler { label = "chore";      title = "regex:^(chore)(\\(.*\\))?:"; order = 16 }
+                labeler { label = "wip";        title = "regex:^(wip)(\\(.*\\))?:";   order = 17 }
+                labeler { label = "task";       title = "regex:^(task)(\\(.*\\))?:";  order = 18 }
+                labeler { label = "docs";       title = "regex:^(docs)(\\(.*\\))?:";  order = 19 }
+                labeler { label = "deprecate";  title = "regex:^(deprecat(e|ed|ion))(\\(.*\\))?:"; order = 20 }
+                labeler { label = "merge";      title = "regex:^(merge)(\\(.*\\))?:"; order = 21 }
+
+                // 🗂 Categories
                 category {
                     title = "🛠 Build"
                     key = "build"
@@ -252,7 +276,7 @@ jreleaser {
                 category {
                     title = "🐛 Bug Fixes"
                     key = "fixes"
-                    labels = setOf("fix", "hotfix", "bug", "security")
+                    labels = setOf("bug", "fix", "hotfix", "security")
                     format = "- {{commitShortHash}} {{commitBody}}"
                     order = 20
                 }
@@ -266,7 +290,7 @@ jreleaser {
                 category {
                     title = "🔄 Changes"
                     key = "changes"
-                    labels = setOf("perf", "refactor", "revert", "style", "ref")
+                    labels = setOf("perf", "refactor", "ref", "revert", "style")
                     format = "- {{commitShortHash}} {{commitBody}}"
                     order = 40
                 }
@@ -280,7 +304,7 @@ jreleaser {
                 category {
                     title = "🧰 Tasks"
                     key = "chores"
-                    labels = setOf("chore", "wip, task, tasks")
+                    labels = setOf("chore", "wip", "task")
                     format = "- {{commitShortHash}} {{commitBody}}"
                     order = 60
                 }
@@ -292,18 +316,18 @@ jreleaser {
                     order = 70
                 }
                 category {
+                    title = "⚠️ Deprecations"
+                    key = "deprecations"
+                    labels = setOf("deprecate")
+                    format = "- {{commitShortHash}} {{commitBody}}"
+                    order = 80
+                }
+                category {
                     title = "🔀 Merge"
                     key = "merge"
                     labels = setOf("merge")
                     format = "- {{commitShortHash}} {{commitBody}}"
                     order = 0
-                }
-                category {
-                    title = "⚠️ Deprecations"
-                    key = "deprecations"
-                    labels = setOf("deprecate", "deprecated")
-                    format = "- {{commitShortHash}} {{commitBody}}"
-                    order = 25
                 }
             }
             commitAuthor {
@@ -313,8 +337,10 @@ jreleaser {
             prerelease {
                 enabled = false
             }
+
             update {
                 enabled = true
+                section(UpdateSection.ASSETS.name)
             }
         }
     }
@@ -351,6 +377,9 @@ tasks.named("jreleaserAutoConfigRelease") {
     dependsOn(androidAar)
     dependsOn(androidExportProjectZip)
 }
+tasks.named("jreleaserChangelog") {
+    dependsOn("clean")
+}
 tasks.named("jreleaserFullRelease") {
     dependsOn(androidAar)
     dependsOn(androidExportProjectZip)
@@ -362,6 +391,11 @@ tasks.named("jreleaserRelease") {
     dependsOn(":$moduleID:publish")
 }
 tasks.named("jreleaserPublish") {
+    dependsOn(androidAar)
+    dependsOn(androidExportProjectZip)
+    dependsOn(":$moduleID:publish")
+}
+tasks.named("jreleaserUpload") {
     dependsOn(androidAar)
     dependsOn(androidExportProjectZip)
     dependsOn(":$moduleID:publish")
@@ -395,16 +429,17 @@ tasks.withType<org.jetbrains.dokka.gradle.DokkaTaskPartial>().configureEach {
         suppressGeneratedFiles.set(true)
         sourceLink {
             localDirectory.set(file("src/main/kotlin")) // or "src/main/kotlin" if Kotlin
-            remoteUrl.set(URI("https://github.com/IODevBlue/DesignColors/tree/main/designcolors/src/main/kotlin").toURL())
+            remoteUrl.set(URI("https://${repositoryUrl}/tree/main/$moduleID/src/main/kotlin").toURL())
             remoteLineSuffix.set("#L")
         }
         externalDocumentationLink {
-            url.set(URI("\"https://github.com/IODevBlue/DesignColors/blob/main/README.md").toURL())
+            url.set(URI("https://${repositoryUrl}/blob/main/README.md").toURL())
         }
     }
 }
 
 val androidAar by tasks.register<Jar>("androidAar") {
+    group = "iodevblue"
     val path = "build/outputs/aar/${moduleID}-release.aar"
     val file = rootProject.project(moduleID).file(path)
 
@@ -429,7 +464,7 @@ val androidAar by tasks.register<Jar>("androidAar") {
     }
 }
 val androidExportProjectZip by tasks.register<Zip>("androidExportProjectZip") {
-    // Name and destination
+    group = "iodevblue"
     archiveFileName.set("${releaseTitleNoSpaces}_v${releaseVersion}.zip")
     val outputDir = "${rootProject.projectDir}/artefacts/${moduleID}/${releaseVersion}"
     destinationDirectory.set(file(outputDir))
@@ -485,6 +520,7 @@ val androidExportProjectZip by tasks.register<Zip>("androidExportProjectZip") {
     }
 }
 val androidJar by tasks.register<Jar>("androidJar") {
+    group = "iodevblue"
     val path = "build/intermediates/full_jar/release/createFullJarRelease/full.jar"
     val file = rootProject.project(moduleID).file(path)
 
@@ -508,6 +544,7 @@ val androidJar by tasks.register<Jar>("androidJar") {
     }
 }
 val androidJavadocJar by tasks.register<Jar>("androidJavadocJar") {
+    group = "iodevblue"
     dependsOn(dokkaJavadocJar)
     archiveClassifier.set("javadoc")
     from(dokkaJavadocJar.flatMap { it.outputDirectory })
@@ -521,6 +558,7 @@ val androidJavadocJar by tasks.register<Jar>("androidJavadocJar") {
 }
 @Suppress("UnstableApiUsage")
 val androidSourcesJar by tasks.register<Jar>("androidSourcesJar") {
+    group = "iodevblue"
     archiveClassifier.set("sources")
     from(android.sourceSets.getByName("main").kotlin.directories.map { file(it) })
     doLast {
@@ -533,6 +571,7 @@ val androidSourcesJar by tasks.register<Jar>("androidSourcesJar") {
 }
 
 val dokkaJavadocJar by tasks.registering(org.jetbrains.dokka.gradle.DokkaTaskPartial::class) {
+    group = "iodevblue"
     moduleName.set(rootProject.name)
     suppressInheritedMembers.set(true)
     offlineMode.set(true)
