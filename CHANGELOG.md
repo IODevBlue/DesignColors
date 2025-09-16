@@ -1,5 +1,10 @@
 Change Log
 ==========
+* **1.2.1**
+  * Added extensions to convert between Android colors and Jetpack Compose colors:
+    - `Int.toComposeColor()` – Converts an Android `@ColorInt` Int to a Compose Color.
+    - `Long.toComposeColor()` – Converts a packed ARGB Long to a Compose Color.
+    - `Color.toColorInt()` – Converts a Jetpack Compose Color back to an Android @ColorInt Int.
 
 * **1.2.0**
   * **New Design Systems**: Added color palettes for Apple HIG, Atlassian, Bootstrap and Microsoft Fluent UI.
