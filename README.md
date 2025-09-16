@@ -2,12 +2,11 @@ DesignColors
 ============
 
 [![Current Version](https://img.shields.io/github/v/tag/IODevBlue/DesignColors?label=Current%20Version&color=2CCCE4&style=for-the-badge&labelColor=0109B6)](https://github.com/IODevBlue/DesignColors/releases)
-<img alt="Repo Size" src="https://img.shields.io/github/repo-size/IODevBlue/DesignColors?color=2CCCE4&style=for-the-badge&labelColor=0109B6">
-[<img alt="License" src="https://img.shields.io/github/license/IODevBlue/DesignColors?color=2CCCE4&style=for-the-badge&labelColor=0109B6">](http://www.apache.org/licenses/LICENSE-2.0)
-[<img alt="Stars" src="https://img.shields.io/github/stars/IODevBlue/DesignColors?color=2CCCE4&style=for-the-badge&labelColor=0109B6">](https://github.com/IODevBlue/DesignColors/stargazers)
-![Watchers](https://img.shields.io/github/watchers/IODevBlue/DesignColors?label=Watchers&style=for-the-badge&color=2CCCE4&labelColor=0109B6)
-[<img alt="Gradle version" src="https://img.shields.io/static/v1?label=Gradle&message=9.0.0&color=2CCCE4&style=for-the-badge&labelColor=0109B6">](https://docs.gradle.org/9.0.0/release-notes)
-[<img alt="Kotlin version" src="https://img.shields.io/static/v1?label=Kotlin&message=1.9.10&color=2CCCE4&style=for-the-badge&labelColor=0109B6">](https://kotlinlang.org/docs/whatsnew1910.html)
+[![Repo Size](https://img.shields.io/github/repo-size/IODevBlue/DesignColors?color=2CCCE4&style=for-the-badge&labelColor=0109B6)](https://github.com/IODevBlue/DesignColors)
+[![License](https://img.shields.io/github/license/IODevBlue/DesignColors?color=2CCCE4&style=for-the-badge&labelColor=0109B6)](http://www.apache.org/licenses/LICENSE-2.0)
+[![Stars](https://img.shields.io/github/stars/IODevBlue/DesignColors?color=2CCCE4&style=for-the-badge&labelColor=0109B6)](https://github.com/IODevBlue/DesignColors/stargazers)
+[![Gradle](https://img.shields.io/static/v1?label=Gradle&message=9.0.0&color=2CCCE4&style=for-the-badge&labelColor=0109B6)](https://docs.gradle.org/9.0.0/release-notes)
+[![Kotlin](https://img.shields.io/static/v1?label=Kotlin&message=2.2.20&color=2CCCE4&style=for-the-badge&labelColor=0109B6)](https://kotlinlang.org/docs/whatsnew2220.html)
 
 This is a library that provides a Singleton class containing default colors specified in the: 
 - [Material Color System](https://material.io/design/color/the-color-system.html#color-theme-creation).
@@ -25,9 +24,6 @@ Table of content
 - [Installation](https://github.com/IODevBlue/DesignColors/tree/main#installation)
 - [Usage](https://github.com/IODevBlue/DesignColors/tree/main#usage)
 - [Java interoperability](https://github.com/IODevBlue/DesignColors/tree/main#java-interoperability)
-- [Configurations](https://github.com/IODevBlue/DesignColors/tree/main#configurations)
-    - [XML attributes](https://github.com/IODevBlue/DesignColors/tree/main#xml-attributes)
-- [Applications using DesignColors](https://github.com/IODevBlue/DesignColors/tree/main#applications-using-DesignColors)
 - [Contributions](https://github.com/IODevBlue/DesignColors/tree/main#contributions)
 - [Changelog](https://github.com/IODevBlue/DesignColors/tree/main#changelog)
 - [License](https://github.com/IODevBlue/DesignColors/tree/main#license)
@@ -72,7 +68,7 @@ Then retrieve a copy:
 implementation ("io.github.iodevblue:designcolors:${current-version}-SNAPSHOT")
 ```
 
-* Grab a JAR or AAR artifact from the [release](https://github.com/IODevBlue/:repo/releases) section.
+* Grab a JAR or AAR artifact from the [release](https://github.com/IODevBlue/DesignColors/releases) section.
 - Place it in `libs` folder in your project module and install in your project.
 ```kotlin
 //build.gradle.kts
@@ -155,6 +151,17 @@ To select Facebook Messenger's Light Blue:
 int midNightBlue50 = DesignColors.Facebook.Messenger.getLIGHT_BLUE();
 ```
 
+Contributions
+-------------
+Contributors are welcome!
+
+**NOTE:** This repository is organized into two branches:
+- [main](https://github.com/IODevBlue/DesignColors/tree/main) branch: contains stable, finalized updates.
+- [development](https://github.com/IODevBlue/DesignColors/tree/development) branch: used for active development and proposed changes.
+
+Check the [Contributing](https://github.com/IODevBlue/DesignColors/blob/development/CONTRIBUTING.md) for more information.
+
+
 Changelog
 ---------
 * **1.2.1**
@@ -163,17 +170,7 @@ Changelog
       - `Long.toComposeColor()` – Converts a packed ARGB Long to a Compose Color.
       - `Color.toColorInt()` – Converts a Jetpack Compose Color back to an Android @ColorInt Int.
 
-* **1.2.0**
-    * **New Design Systems**: Added color palettes for Apple HIG, Atlassian, Bootstrap and Microsoft Fluent UI.
-    * **Compose Color Utilities**: Included new utility functions for converting between Android `ColorInt` and Jetpack Compose `Color` types:
-      - `toComposeColor(@ColorInt color: Int)`
-      - `toComposeColor(color: Long)`
-      - `fromComposeColor(color: androidx.compose.ui.graphics.Color)`
-    * **Expanded Brand Colors**: Added colors for X (formerly Twitter).
-  
-* **1.1.2**
-    * Included `@JvmStatic` to ease Java interoperability.
-    * Added utility function `getRGB()` and `createColor()`.
+Check the [CHANGELOG](https://github.com/IODevBlue/DesignColors/blob/development/CHANGELOG.md) for all previous releases.
 
 License
 -------
