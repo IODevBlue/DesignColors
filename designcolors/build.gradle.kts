@@ -145,12 +145,11 @@ jreleaser {
                     snapshotSupported = true
                     url = "https://central.sonatype.com/api/v1/publisher"
                     verifyPom = true
-                    verifyUrl = "https://repo1.maven.org/maven2/io/github/iodevblue/designcolors/maven-metadata.xml"
                 }
             }
             nexus2 {
                 create("snapshots") {
-                    setActive("SNAPSHOT")
+                    setActive(Active.SNAPSHOT.name)
                     setAuthorization("BASIC")
                     stagingRepository("build/staging-deploy")
                     applyMavenCentralRules = true
@@ -239,9 +238,13 @@ jreleaser {
                 }
 
                 hide {
-                    categories = setOf("merge")
-                    contributors = setOf("[bot]")
-                    uncategorized = false
+                    categories = setOf("merge", "misc")
+                    contributors = setOf(
+                        "bot",
+                        "GitHub",
+                        "Emmanuel E.",
+                    )
+                    uncategorized = true
                 }
                 category {
                     title = "🚀 Features"
@@ -417,7 +420,6 @@ tasks.named("jreleaserDeploy") {
     dependsOn(androidJavadocJar)
     dependsOn(androidSourcesJar)
     dependsOn(androidExportProjectZip)
-
 }
 tasks.named("jreleaserFullRelease") {
     dependsOn(androidAar)
@@ -425,7 +427,7 @@ tasks.named("jreleaserFullRelease") {
     dependsOn(androidJavadocJar)
     dependsOn(androidSourcesJar)
     dependsOn(androidExportProjectZip)
-    dependsOn(":$moduleID:publish")
+    dependsOn(createStagingDeployDir)
 }
 tasks.named("jreleaserRelease") {
     dependsOn(androidAar)
