@@ -13,7 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # required for JReleaser to see full git history
+          fetch-depth: 0 # required for JReleaser to see full git history
 
       - name: Set up Java
         uses: actions/setup-java@v4

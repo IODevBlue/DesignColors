@@ -47,29 +47,31 @@ Features
 Installation
 ------------
 **current-version: v1.2.1**
+
 There are several ways to install this library.
 
-* Grab a JAR artifact from the Maven Central Repository:
+Grab a JAR artifact from the Maven Central Repository:
 ```kotlin
 //build.gradle.kts
 implementation ("io.github.iodevblue:designcolors:${current-version}")
 ```
 
-If it is a snapshot version, add the Sonatype OSS Nexus snapshots repository.:
+- If it is a snapshot version, add the Sonatype OSS Nexus snapshots repository.:
 ```kotlin
 //build.gradle.kts
 maven {
     url = uri("https://central.sonatype.com/repository/maven-snapshots/")
 }
 ```
-Then retrieve a copy:
+- Then retrieve a copy:
 ```kotlin
 //build.gradle.kts
 implementation ("io.github.iodevblue:designcolors:${current-version}-SNAPSHOT")
 ```
 
-* Grab a JAR or AAR artifact from the [release](https://github.com/IODevBlue/DesignColors/releases) section.
-- Place it in `libs` folder in your project module and install in your project.
+Grab a JAR or AAR artifact from the [release](https://github.com/IODevBlue/DesignColors/releases) section. 
+
+Place it in `libs` folder in your project module and install in your project.
 ```kotlin
 //build.gradle.kts
 implementation(fileTree("libs") { include("*.jar", "*.aar") })
@@ -154,6 +156,8 @@ int midNightBlue50 = DesignColors.Facebook.Messenger.getLIGHT_BLUE();
 Contributions
 -------------
 Contributors are welcome!
+
+If you would like to add your startup or company's official colors to this library, you can do so by contributing. Your additions help make this a more comprehensive and useful resource for designers and developers.
 
 **NOTE:** This repository is organized into two branches:
 - [main](https://github.com/IODevBlue/DesignColors/tree/main) branch: contains stable, finalized updates.
