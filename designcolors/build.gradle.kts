@@ -16,6 +16,7 @@ plugins {
 
 val groupID = "io.github.iodevblue"
 val moduleID = "designcolors"
+val projectNamespace = "io.github.iodevblue.api.android.designcolors"
 val previousVersion = "1.1.2"
 val releaseVersion = "1.2.1"
 val releaseTitle = "Design Colors"
@@ -26,7 +27,7 @@ group = groupID
 version = releaseVersion
 
 android {
-    namespace = "io.github.iodevblue.api.android.designcolors"
+    namespace = projectNamespace
     compileSdk = 36
 
     defaultConfig {
@@ -137,7 +138,7 @@ jreleaser {
                     sign = true
                     javadocJar = true
                     readTimeout = 60
-                    namespace = "io.github.iodevblue.api.android.designcolors"
+                    namespace = projectNamespace
                     retryDelay = 20
                     maxRetries = 100
                     sourceJar = true
@@ -165,10 +166,10 @@ jreleaser {
         create("release") {
             tag("v$releaseVersion")
             artifact {
-                setPath("${rootProject.projectDir}/artefacts/${moduleID}/${releaseVersion}/${releaseTitleNoSpaces}_v${releaseVersion}.aar")
+                setPath("${rootProject.projectDir}/artifacts/${moduleID}/${releaseVersion}/${releaseTitleNoSpaces}_v${releaseVersion}.aar")
             }
             artifact {
-                setPath("${rootProject.projectDir}/artefacts/${moduleID}/${releaseVersion}/${releaseTitleNoSpaces}_v${releaseVersion}.jar")
+                setPath("${rootProject.projectDir}/artifacts/${moduleID}/${releaseVersion}/${releaseTitleNoSpaces}_v${releaseVersion}.jar")
             }
         }
     }
@@ -223,7 +224,8 @@ jreleaser {
             changelog {
                 categoryTitleFormat = "### {{categoryTitle}}"
                 contributorsTitleFormat = "### Contributors"
-                content = "\n\n{{changelogChanges}}\n{{changelogContributors}}"
+                contentTemplate.set(File("${rootProject.projectDir}/changelog.tpl"))
+//                content = "\n\n{{changelogChanges}}\n{{changelogContributors}}"
                 enabled = true
                 excludeLabels = setOf()
                 format = "- {{commitShortHash}} {{commitTitle}}"
@@ -241,8 +243,70 @@ jreleaser {
                     contributors = setOf("[bot]")
                     uncategorized = false
                 }
+                category {
+                    title = "🚀 Features"
+                    key = "features"
+                    labels = setOf("feat", "breaking")
+                    format = "- {{commitShortHash}} {{commitBody}}"
+                    order = 1
+                }
+                category {
+                    title = "🐛 Bug Fixes"
+                    key = "fixes"
+                    labels = setOf("bug", "fix", "hotfix", "security")
+                    format = "- {{commitShortHash}} {{commitBody}}"
+                    order = 2
+                }
+                category {
+                    title = "🔄 Changes"
+                    key = "changes"
+                    labels = setOf("perf", "refactor", "ref", "revert", "style")
+                    format = "- {{commitShortHash}} {{commitBody}}"
+                    order = 3
+                }
+                category {
+                    title = "🛠 Build"
+                    key = "build"
+                    labels = setOf("build", "deps", "ci")
+                    format = "- {{commitShortHash}} {{commitBody}}"
+                    order = 4
+                }
+                category {
+                    title = "🧪 Tests"
+                    key = "tests"
+                    labels = setOf("test")
+                    format = "- {{commitShortHash}} {{commitBody}}"
+                    order = 5
+                }
+                category {
+                    title = "🧰 Tasks"
+                    key = "chores"
+                    labels = setOf("chore", "wip", "task")
+                    format = "- {{commitShortHash}} {{commitBody}}"
+                    order = 6
+                }
+                category {
+                    title = "📝 Documentation"
+                    key = "docs"
+                    labels = setOf("docs")
+                    format = "- {{commitShortHash}} {{commitBody}}"
+                    order = 7
+                }
+                category {
+                    title = "⚠️ Deprecations"
+                    key = "deprecations"
+                    labels = setOf("deprecate")
+                    format = "- {{commitShortHash}} {{commitBody}}"
+                    order = 8
+                }
+                category {
+                    title = "🔀 Merge"
+                    key = "merge"
+                    labels = setOf("merge")
+                    format = "- {{commitShortHash}} {{commitBody}}"
+                    order = 9
+                }
 
-                // 🔖 Labelers
                 labeler { label = "build";      title = "regex:^(build)(\\(.*\\))?:"; order = 1 }
                 labeler { label = "ci";         title = "regex:^(ci)(\\(.*\\))?:";    order = 2 }
                 labeler { label = "deps";       title = "regex:^(deps)(\\(.*\\))?:";  order = 3 }
@@ -265,69 +329,25 @@ jreleaser {
                 labeler { label = "deprecate";  title = "regex:^(deprecat(e|ed|ion))(\\(.*\\))?:"; order = 20 }
                 labeler { label = "merge";      title = "regex:^(merge)(\\(.*\\))?:"; order = 21 }
 
-                // 🗂 Categories
-                category {
-                    title = "🛠 Build"
-                    key = "build"
-                    labels = setOf("build", "deps", "ci")
-                    format = "- {{commitShortHash}} {{commitBody}}"
-                    order = 10
-                }
-                category {
-                    title = "🐛 Bug Fixes"
-                    key = "fixes"
-                    labels = setOf("bug", "fix", "hotfix", "security")
-                    format = "- {{commitShortHash}} {{commitBody}}"
-                    order = 20
-                }
-                category {
-                    title = "🚀 Features"
-                    key = "features"
-                    labels = setOf("feat", "breaking")
-                    format = "- {{commitShortHash}} {{commitBody}}"
-                    order = 30
-                }
-                category {
-                    title = "🔄 Changes"
-                    key = "changes"
-                    labels = setOf("perf", "refactor", "ref", "revert", "style")
-                    format = "- {{commitShortHash}} {{commitBody}}"
-                    order = 40
-                }
-                category {
-                    title = "🧪 Tests"
-                    key = "tests"
-                    labels = setOf("test")
-                    format = "- {{commitShortHash}} {{commitBody}}"
-                    order = 50
-                }
-                category {
-                    title = "🧰 Tasks"
-                    key = "chores"
-                    labels = setOf("chore", "wip", "task")
-                    format = "- {{commitShortHash}} {{commitBody}}"
-                    order = 60
-                }
-                category {
-                    title = "📝 Documentation"
-                    key = "docs"
-                    labels = setOf("docs")
-                    format = "- {{commitShortHash}} {{commitBody}}"
-                    order = 70
-                }
-                category {
-                    title = "⚠️ Deprecations"
-                    key = "deprecations"
-                    labels = setOf("deprecate")
-                    format = "- {{commitShortHash}} {{commitBody}}"
-                    order = 80
-                }
-                category {
-                    title = "🔀 Merge"
-                    key = "merge"
-                    labels = setOf("merge")
-                    format = "- {{commitShortHash}} {{commitBody}}"
-                    order = 0
+                replacer {
+                    search = "We'd like to thank the following people for their contributions:"
+                    replace = listOf(
+                        "A massive shoutout to our awesome contributors!",
+                        "Thanks a ton to everyone who helped!",
+                        "High fives to all contributors involved!",
+                        "Kudos to the folks who made this release possible!",
+                        "Hats off to our amazing contributors!",
+                        "We couldn’t have done it without you, thank you!",
+                        "Three cheers for everyone who pitched in!",
+                        "Your hard work made this release happen—thank you!",
+                        "Grateful for all the contributions, big and small!",
+                        "To all the contributors: you rock!",
+                        "Shoutout to our incredible community of contributors!",
+                        "Thanks for helping us reach the next milestone!",
+                        "Appreciation to everyone who made this release shine!",
+                        "Here’s to the amazing people behind this release!",
+                        "Every contribution counts—thank you all!"
+                    ).random()
                 }
             }
             commitAuthor {
@@ -345,8 +365,11 @@ jreleaser {
         }
     }
     signing {
-        setActive("ALWAYS")
+        setActive(Active.ALWAYS.formatted())
         armored = true
+    }
+    upload {
+        setActive(Active.ALWAYS.formatted())
     }
 }
 signing {
@@ -360,44 +383,71 @@ signing {
 
 
 // GRADLE TASKS
+//tasks.matching { it.name.startsWith("jreleaser") }.configureEach {
+//    // Ensure all JReleaser tasks run 'clean' first.
+//    dependsOn("clean")
+//}
 tasks.named<Delete>("clean") {
-    delete("${rootProject.projectDir}/artefacts/")
+    delete("${rootProject.projectDir}/artifacts/")
 }
 tasks.named<org.jetbrains.dokka.gradle.DokkaTask>("dokkaHtml") {
     outputDirectory.set(
-        file("${rootProject.projectDir}/artefacts/${moduleID}/${releaseVersion}/docs/html")
+        file("${rootProject.projectDir}/artifacts/${moduleID}/${releaseVersion}/docs/html")
     )
 }
 tasks.named<org.jetbrains.dokka.gradle.DokkaTask>("dokkaJavadoc") {
     outputDirectory.set(
-        file("${rootProject.projectDir}/artefacts/${moduleID}/${releaseVersion}/docs/javadoc")
+        file("${rootProject.projectDir}/artifacts/${moduleID}/${releaseVersion}/docs/javadoc")
     )
 }
 tasks.named("jreleaserAutoConfigRelease") {
     dependsOn(androidAar)
+    dependsOn(androidJar)
+    dependsOn(androidJavadocJar)
+    dependsOn(androidSourcesJar)
     dependsOn(androidExportProjectZip)
 }
 tasks.named("jreleaserChangelog") {
     dependsOn("clean")
 }
+tasks.named("jreleaserDeploy") {
+    dependsOn(createStagingDeployDir)
+    dependsOn(androidAar)
+    dependsOn(androidJar)
+    dependsOn(androidJavadocJar)
+    dependsOn(androidSourcesJar)
+    dependsOn(androidExportProjectZip)
+
+}
 tasks.named("jreleaserFullRelease") {
     dependsOn(androidAar)
+    dependsOn(androidJar)
+    dependsOn(androidJavadocJar)
+    dependsOn(androidSourcesJar)
     dependsOn(androidExportProjectZip)
     dependsOn(":$moduleID:publish")
 }
 tasks.named("jreleaserRelease") {
     dependsOn(androidAar)
-    dependsOn(androidExportProjectZip)
     dependsOn(androidJar)
+    dependsOn(androidJavadocJar)
+    dependsOn(androidSourcesJar)
+    dependsOn(androidExportProjectZip)
     dependsOn(createStagingDeployDir)
 }
 tasks.named("jreleaserPublish") {
     dependsOn(androidAar)
+    dependsOn(androidJar)
+    dependsOn(androidJavadocJar)
+    dependsOn(androidSourcesJar)
     dependsOn(androidExportProjectZip)
     dependsOn(":$moduleID:publish")
 }
 tasks.named("jreleaserUpload") {
     dependsOn(androidAar)
+    dependsOn(androidJar)
+    dependsOn(androidJavadocJar)
+    dependsOn(androidSourcesJar)
     dependsOn(androidExportProjectZip)
     dependsOn(":$moduleID:publish")
 }
@@ -460,14 +510,14 @@ val androidAar by tasks.register<Jar>("androidAar") {
         copy {
             from(archiveFile)
             rename { "${releaseTitleNoSpaces}_v${releaseVersion}.aar" }
-            into("${rootProject.projectDir}/artefacts/${moduleID}/${releaseVersion}")
+            into("${rootProject.projectDir}/artifacts/${moduleID}/${releaseVersion}")
         }
     }
 }
 val androidExportProjectZip by tasks.register<Zip>("androidExportProjectZip") {
     group = "iodevblue"
     archiveFileName.set("${releaseTitleNoSpaces}_v${releaseVersion}.zip")
-    val outputDir = "${rootProject.projectDir}/artefacts/${moduleID}/${releaseVersion}"
+    val outputDir = "${rootProject.projectDir}/artifacts/${moduleID}/${releaseVersion}"
     destinationDirectory.set(file(outputDir))
 
     // Include only essential project files
@@ -503,7 +553,7 @@ val androidExportProjectZip by tasks.register<Zip>("androidExportProjectZip") {
         exclude("jreleaser-schema-1.20.0.json")
         exclude("/.kotlin")
         exclude(".project")
-        exclude("/artefacts")
+        exclude("/artifacts")
         exclude()
 
     }
@@ -540,20 +590,19 @@ val androidJar by tasks.register<Jar>("androidJar") {
         copy {
             from(archiveFile)
             rename { "${releaseTitleNoSpaces}_v${releaseVersion}.jar" }
-            into("${rootProject.projectDir}/artefacts/${moduleID}/${releaseVersion}")
+            into("${rootProject.projectDir}/artifacts/${moduleID}/${releaseVersion}")
         }
     }
 }
 val androidJavadocJar by tasks.register<Jar>("androidJavadocJar") {
     group = "iodevblue"
-    dependsOn(dokkaJavadocJar)
     archiveClassifier.set("javadoc")
     from(dokkaJavadocJar.flatMap { it.outputDirectory })
     doLast {
         copy {
             from(archiveFile)
             rename { "${releaseTitleNoSpaces}_v${releaseVersion}-javadoc.jar" }
-            into("${rootProject.projectDir}/artefacts/${moduleID}/${releaseVersion}")
+            into("${rootProject.projectDir}/artifacts/${moduleID}/${releaseVersion}")
         }
     }
 }
@@ -566,7 +615,7 @@ val androidSourcesJar by tasks.register<Jar>("androidSourcesJar") {
         copy {
             from(archiveFile)
             rename { "${releaseTitleNoSpaces}_v${releaseVersion}-sources.jar" }
-            into("${rootProject.projectDir}/artefacts/${moduleID}/${releaseVersion}")
+            into("${rootProject.projectDir}/artifacts/${moduleID}/${releaseVersion}")
         }
     }
 }
