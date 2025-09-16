@@ -1,45 +1,15 @@
-name: Merge development branch to main branch
+name: Auto-merge development into main
 
 on:
-  workflow_dispatch: # manual trigger
   push:
     tags:
-      - 'v*' # run when a version tag is pushed (e.g., v1.2.0)
+      - 'v*'  # triggers whenever a version tag is pushed
 
 jobs:
-  release:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # required for JReleaser to see full git history
-
-      - name: Set up Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: 21
-
-      - name: Cache Gradle
-        uses: gradle/actions/setup-gradle@v3
-
-      - name: Grant execute permission for Gradlew
-        run: chmod +x ./gradlew
-
-      - name: Run JReleaser
-        run: ./gradlew jreleaserFullRelease -S
-        env:
-          JRELEASER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          JRELEASER_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-          JRELEASER_GPG_PUBLIC_KEY: ${{ secrets.GPG_PUBLIC_KEY }}
-          JRELEASER_GPG_SECRET_KEY: ${{ secrets.GPG_SECRET_KEY }}
-
   merge:
-    needs: release
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
+      - name: Checkout main branch
         uses: actions/checkout@v4
         with:
           ref: main
@@ -53,5 +23,5 @@ jobs:
       - name: Merge development into main
         run: |
           git fetch origin development:development
-          git merge --no-ff development -m "chore: merge development into main after release"
+          git merge --no-ff development -m "chore: merge development into main after tag push"
           git push origin main
