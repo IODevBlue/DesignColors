@@ -1,0 +1,27 @@
+[versions]
+agp = "8.12.3"
+appcompat = "1.7.1"
+compose-ui = "1.9.1"
+coreKtx = "1.17.0"
+guava = "33.4.8-android"
+jetbrains-dokka = "2.0.0"
+jreleaser = "1.20.0"
+kotlin = "2.2.20"
+material = "1.13.0"
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+jetbrains-dokka = { id = "org.jetbrains.dokka", version.ref = "jetbrains-dokka" }
+jreleaser = { id = "org.jreleaser", version.ref = "jreleaser" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+
+[libraries]
+appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+compose-ui = { group = "androidx.compose.ui", name = "ui", version.ref = "compose-ui" }
+core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+guava = { module = "com.google.guava:guava", version.ref = "guava" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+

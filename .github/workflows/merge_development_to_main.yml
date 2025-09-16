@@ -1,0 +1,33 @@
+name: Auto-merge development into main
+
+on:
+  push:
+    tags:
+      - 'v*'
+  release:
+    types: [published] # triggers whenever a release is published
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0 # needed to fetch full history for merge
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Merge development into main
+        run: |
+          git fetch origin development # Fetches the development branch
+          git merge --no-ff origin/development -m "chore: merge development into main after release" # Merges the remote development branch
+
+      - name: Push merged changes back to remote
+        run: git push origin main
