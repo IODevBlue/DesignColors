@@ -19,3 +19,6 @@ trace.log
 /.idea/runConfigurations.xml
 /.idea
 /artifacts
+# .gitignore
+jreleaser-schema-*.json
+.project

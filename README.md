@@ -30,19 +30,29 @@ Table of content
 
 Uses
 ----
-Use DesignColors: 
-- When you specifically need to work with Material, Flat Design Colors or any other design palette in Kotlin code or a multi-platform project using Kotlin.
-- When you need to reference design colors from mainstream apps for personal purposes.
+The DesignColors singleton provides easy access to a wide variety of predefined color palettes from major design systems and popular brands. 
+Use it when you need:
+- Direct access to Material, Flat UI, Apple, Atlassian, Bootstrap, Microsoft Fluent, or curated brand color palettes in Kotlin code or multi-platform Kotlin projects. 
+- To reference official colors from mainstream apps for personal projects, prototypes, or design consistency. 
+- A centralized color utility for apps where consistent color theming is important.
 
 Features
 --------
-- Supports conversion from and to Jetpack Compose [Color](https://developer.android.com/reference/kotlin/androidx/compose/ui/graphics/Color) class.
-- Utility functions for working with colors:
-  - Add alpha transparency (int or float values).
-  - Detect whether a color is light or dark.
-  - Extract RGB values or create colors from RGB components.
-  - Convert between Android `ColorInt` and Jetpack Compose `Color`.
-- Extension functions on a `ColorInt` to convert to a Jetpack Compose `Color`.
+DesignColors includes utility functions and extensions to make working with colors in Kotlin simpler:
+* **Color conversion support:**
+  - Convert between Android `ColorInt` and Jetpack Compose [Color](https://developer.android.com/reference/kotlin/androidx/compose/ui/graphics/Color).
+
+* **Alpha transparency:**
+  - Apply alpha (opacity) to colors using either integer or float values.
+
+* **Color analysis:**
+  - Determine if a color is light or dark.
+
+* **RGB utilities:**
+  - Extract RGB components or construct colors from RGB values.
+
+* **Jetpack Compose extensions:**
+  - Convert ColorInt values to Compose Color objects seamlessly.
 
 Installation
 ------------
