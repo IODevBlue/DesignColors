@@ -388,7 +388,8 @@ tasks.named("jreleaserFullRelease") {
 tasks.named("jreleaserRelease") {
     dependsOn(androidAar)
     dependsOn(androidExportProjectZip)
-    dependsOn(":$moduleID:publish")
+    dependsOn(androidJar)
+    dependsOn(createStagingDeployDir)
 }
 tasks.named("jreleaserPublish") {
     dependsOn(androidAar)
@@ -566,6 +567,23 @@ val androidSourcesJar by tasks.register<Jar>("androidSourcesJar") {
             from(archiveFile)
             rename { "${releaseTitleNoSpaces}_v${releaseVersion}-sources.jar" }
             into("${rootProject.projectDir}/artefacts/${moduleID}/${releaseVersion}")
+        }
+    }
+}
+val createStagingDeployDir by tasks.registering {
+    group = "iodevblue"
+    description = "Ensures the staging-deploy directory exists inside build/."
+
+    val stagingDir = layout.buildDirectory.dir("staging-deploy")
+    outputs.dir(stagingDir)
+
+    doLast {
+        val dir = stagingDir.get().asFile
+        if (!dir.exists()) {
+            dir.mkdirs()
+            println("Created staging-deploy directory: $dir")
+        } else {
+            println("staging-deploy directory already exists: $dir")
         }
     }
 }

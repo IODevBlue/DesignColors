@@ -24,6 +24,9 @@ jobs:
       - name: Cache Gradle
         uses: gradle/actions/setup-gradle@v3
 
+      - name: Grant execute permission for Gradlew
+        run: chmod +x ./gradlew
+
       - name: Run JReleaser
         run: ./gradlew jreleaserFullRelease -S
         env:
